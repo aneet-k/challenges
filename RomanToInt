@@ -1,0 +1,31 @@
+#input is a valid roman numeral in str format
+
+class Solution:
+    def romanToInt(self, st: str) -> int:
+        s = [x for x in st] 
+        s=list(map(lambda x:1000 if x=='M' else x, s))
+        s=list(map(lambda x:500 if x=='D' else x, s))
+        s=list(map(lambda x:100 if x=='C' else x, s))
+        s=list(map(lambda x:50 if x=='L' else x, s))
+        s=list(map(lambda x:10 if x=='X' else x, s))
+        s=list(map(lambda x:5 if x=='V' else x, s))
+        s=list(map(lambda x:1 if x=='I' else x, s))
+        
+        val=0
+        i=0
+        
+        while i<=len(s)-1:
+            if i<=len(s)-2:
+                if(s[i]<s[i+1]):
+                    val+=s[i+1]-s[i]
+                    i+=2
+                else:
+                    val+=s[i]
+                    i+=1
+            else:
+                val+=s[-1]
+                i+=1              
+        return (val)
+    
+#kb=Solution()
+#kb.romanToInt()
