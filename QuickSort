@@ -1,0 +1,27 @@
+#Python2.7
+
+def quicksort(array, low, high):
+    pivot = array[high]
+    pindex = high
+    
+    i = low
+    while True :
+        if pindex == i : break
+        if pindex - i == 1 : 
+            if array[i] > pivot :
+                array[i], array[pindex] = array[pindex], array[i]
+                pindex -= 1
+                continue
+        if array[i] > pivot : 
+            array[pindex], array[pindex-1] = array[pindex-1], array[pindex]
+            array[i], array[pindex] = array[pindex], array[i]
+            pindex -= 1
+            
+        else : i += 1
+    
+    if pindex != low : quicksort(array, low, pindex-1)
+    if pindex != high : quicksort(array, pindex + 1, high)
+
+test = [21, 4, 1, 3, 9, 20, 25, 6, 21, 14]
+quicksort(test, 0, len(test)-1)
+print test
