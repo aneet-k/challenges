@@ -1,0 +1,52 @@
+from bisect import bisect_left, bisect_right
+from collections import defaultdict, OrderedDict
+
+def get_index(a,x):
+		i = bisect_left(a,x)
+		return i
+		
+if __name__ == "__main__":
+	
+	N = int(input())
+	dictt = defaultdict(list)
+	
+	for i in range(N):
+		#l.append(list(map(int, input().split())))
+		k = list(map(int, input().split()))
+		dictt[k[0]].append(k[1])
+		
+	fdict = OrderedDict(sorted(dictt.items()))
+	listofkeys = list(fdict.keys())
+	
+	Q = int(input())
+	for i in range(Q):
+		maxr = -1
+		query  = list(map(int, input().split()))
+		low_price = query[0]
+		high_price = query[1]
+		j = get_index(listofkeys, low_price)
+		#if listofkeys[j] == low_price :
+		for price in listofkeys[j:]:
+			if high_price < price : break
+			h = max(fdict[price])
+			if maxr < h : maxr = h
+		print(maxr)
+		
+ 				
+	
+	
+'''
+first line(s) is price and rating of 5 laptops
+second line(s) is price range within which best rated laptop has to be found
+
+5
+1000 300
+1100 400
+1300 200
+1700 500
+2000 600
+3
+1000 1400
+1700 1900
+0 2000
+'''
